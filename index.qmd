@@ -1,0 +1,13 @@
+---
+title: "DLP Study Guide"
+output: 
+  html: 
+    toc: true
+    toc_depth: 2
+page-navigation: true
+---
+
+# Table of Contents
+
+- Week 0
+  - [Introduction](intro.qmd)

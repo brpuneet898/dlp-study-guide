@@ -19,5 +19,5 @@ Please download [Quarto](https://quarto.org/docs/get-started/) for contributions
 3. Make the desirable changes.
 4. Run `quarto render`. 
 5. **Important:** Run command `mv _site docs`. (For making the study guide live puruposes.)
-6. `git push`
+6. Move it to the GitHub.
 7. Create a pull request. 
