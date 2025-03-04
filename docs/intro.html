@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>intro</title>
+<title>Introduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./sneak.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -164,6 +166,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sneak.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sneak Peak</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -197,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="evolution-of-hugging-face" class="level2">
 <h2 class="anchored" data-anchor-id="evolution-of-hugging-face">Evolution of Hugging Face</h2>
 <p>Hugging Face has proven to be an indispensable tool in the artificial intelligence (AI) domain. It has paved a long way, evolving from a niche-specific chatbot startup into a $4.5 billion open-source powerhouse and delivering access to machine learning, deep learning, and other associated domains. It was founded sometime around 2016. Initially, the company started as a chatbot app that used to target teenagers to provide emotional support via an AI BFF (Best Friend Forever). Soon enough, the founders realized that it had a lot of potential than just being used as a chatbot. They found the underlying principle of natural language processing (NLP) technology. Finally, open-sourced in 2018, they started building a collaborative environment for AI/ML development. This decision led them to become the major leader in the ML ecosystem. The Transformers library was released by Hugging Face (hereafter referred to as HF) in 2018. It was a toolkit based on Python Language that provided simplified access to pre-trained models like BERT and GPT.</p>
-<div id="a3da8eb5" class="cell" data-execution_count="1">
+<div id="51eeb826" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Use this to download the Transformers library into your environment.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">## Uncomment the Code (line starting with a single #) and run it in your choice of environment. </span></span>
@@ -236,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Use code autocompletion with StarCoder/Codellama</li>
 </ul>
 <p><strong>2. Google Colab</strong></p>
-<div id="fba6b035" class="cell" data-execution_count="2">
+<div id="047ef8db" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Install core libraries</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install transformers datasets huggingface_hub</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -254,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Use in Python:</li>
 </ul>
-<div id="73f535d8" class="cell" data-execution_count="3">
+<div id="38efb87b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from huggingface_hub import login</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># login(token="hf_yourtoken")  # For script authentication</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -277,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="3" type="1">
 <li>Reproducibility</li>
 </ol>
-<div id="ecec6165" class="cell" data-execution_count="4">
+<div id="6c1207d8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from transformers import set_seed</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># set_seed(42)  # Across all ML libraries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -862,6 +870,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Index">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Index</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./sneak.html" class="pagination-link" aria-label="Sneak Peak">
+        <span class="nav-page-text">Sneak Peak</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

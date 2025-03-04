@@ -1,0 +1,105 @@
+---
+title: "Sneak Peak into Important Libraries"
+format:
+  html:
+    code-fold: false
+# jupyter: python3
+page-navigation: true
+---
+
+In this section, we will discuss the important libraries that we will be using in the Deep Learning Course. 
+
+1. Hugging Face Datasets 
+
+To install - 
+
+```{python}
+# !pip install datasets
+``` 
+
+Hugging Face Datasets is a powerful library provided by Hugging Face that simplifies loading and processing datasets for various machine learning and deep learning tasks. Over the years, it has become a unified interface for thousands of datasets available on the hub. It provides datasets for various domains starting from audio, computer vision, and natural language processing. The library allows the users to load the datasets with a single piece of code and offers advanced processing algorithms to prepare and customize the data for training in deep learning models. Further, it allows to implement of the various performance metrics that are needed for transformer-based model evaluations. 
+
+Key features - 
+<ul>
+    <li>Easy access to a vast collection of curated datasets from across the world.</li>
+    <li>Efficient data loading and further processing capabilities.</li>
+    <li>Easy integration with other related libraries.</li>
+    <li>Built-in utilities for data preparation, splitting, shuffling, and mapping.</li>
+    <li>Flexibility to fine-tune models on customized needs and datasets.</li>
+</ul>
+
+2. Hugging Face Transformers
+
+To install - 
+
+```{python}
+# !pip install transformers
+```
+
+The Hugging Face Transformers is another important and comprehensive library that provides state-of-the-art pre-trained models for various natural language processing tasks. It offers all types of models including - BERT, GPT, and T5, which can be loaded and fine-tuned for customizable tasks. The library supports other multiple deep learning frameworks such as PyTorch, TensorFlow, and JAX. Further, it makes it versatile for different development environments. 
+
+Key features - 
+<ul>
+    <li>Access to a vast collection of pre-trained models.</li>
+    <li>Support most of the deep learning frameworks. </li>
+    <li>Easy to use APIs for inference and future fine-tuning.</li>
+    <li>Extensive community support is well maintained by tech leaders globally. </li>
+</ul>
+
+3. PyTorch 
+
+To install - 
+
+```{python}
+# !pip install torch
+```
+
+PyTorch is commonly known as Torch. It is one of the most powerful open-source machine-learning libraries developed by Facebook. It is known for its dynamic computational graphs - that allows for more flexible and intuitive model development. It is quite popular among researchers in the field of deep learning due to its ease of use and powerful capabilities. 
+
+Key features - 
+<ul>
+    <li>Dynamic computational graphs for flexible model development.</li>
+    <li>Efficient GPU (like T4, A100, etc) acceleration for faster training and inference.</li>
+    <li>Full collection of tools and libraries for various ML and DL tasks.</li>
+    <li>Regular updates from the community keep everything up-to-date.</li>
+</ul>
+
+4. Pyannote
+
+To install - 
+
+```{python}
+# !pip install pyannote
+```
+
+Pyannote is an open-source Python toolkit. It is specifically designed for speaker diarization tasks. We will be using this library in Week 6 (the speech part). It helps to identify and cluster the fixed number of speakers from the given audio, this process in a nutshell is known as the speaker diarization. It uses the PyTorch deep learning framework. It provides trained models and pipelines, especially efficient in audio analysis. Further, it is also useful in tasks such as speaker segmentation, speaker clustering, and overlapped speech detection. 
+
+Key features - 
+<ul>
+    <li>Provides pre-trained models for speaker diarization tasks.</li>
+    <li>Helps to assemble or create pipelines for audio processing. </li>
+    <li>Provides GPU acceleration support for faster processing. </li>
+    <li>Flexibility to fine-tune models on customized needs and datasets.</li>
+</ul>
+
+5. Whisper
+
+To install - 
+
+```{python}
+# !pip install git+https://github.com/openai/whisper.git
+
+## Also, download FFmpeg for handling various audio formats with ease.
+
+# !pip install ffmpeg
+```
+
+Whisper is another very powerful pre-trained model developed by OpenAI. We will be using this in Weeks 6 and 7. It helps in automatic speech recognition (commonly referred to as ASR) and speech translation. It has been trained on around 680,000 hours of labeled data (mostly in western languages). The vast amount of labeled data helps to generalize well across various datasets and domains, sometimes even without further fine-tuning. Whisper is available to use in different model sizes ranging from tiny to large. This helps to accommodate different computational requirements and varied use cases. 
+
+Key features - 
+<ul>
+    <li>Robust performance in various languages and certain accents. </li>
+    <li>Supports speech recognition and translation tasks.  </li>
+    <li>Availability of different model sizes making it usable for varied purposes. </li>
+    <li>Available as open-source, thereby, creating a strong community. </li>
+</ul>

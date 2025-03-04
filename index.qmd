@@ -11,3 +11,4 @@ page-navigation: true
 
 - Week 0
   - [Introduction](intro.qmd)
+  - [Sneak Peak](sneak.qmd)

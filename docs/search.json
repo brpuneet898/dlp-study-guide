@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "sneak.html",
+    "href": "sneak.html",
+    "title": "Sneak Peak into Important Libraries",
+    "section": "",
+    "text": "In this section, we will discuss the important libraries that we will be using in the Deep Learning Course.\n\nHugging Face Datasets\n\nTo install -\n\n# !pip install datasets\n\nHugging Face Datasets is a powerful library provided by Hugging Face that simplifies loading and processing datasets for various machine learning and deep learning tasks. Over the years, it has become a unified interface for thousands of datasets available on the hub. It provides datasets for various domains starting from audio, computer vision, and natural language processing. The library allows the users to load the datasets with a single piece of code and offers advanced processing algorithms to prepare and customize the data for training in deep learning models. Further, it allows to implement of the various performance metrics that are needed for transformer-based model evaluations.\nKey features -\n\n\nEasy access to a vast collection of curated datasets from across the world.\n\n\nEfficient data loading and further processing capabilities.\n\n\nEasy integration with other related libraries.\n\n\nBuilt-in utilities for data preparation, splitting, shuffling, and mapping.\n\n\nFlexibility to fine-tune models on customized needs and datasets.\n\n\n\nHugging Face Transformers\n\nTo install -\n\n# !pip install transformers\n\nThe Hugging Face Transformers is another important and comprehensive library that provides state-of-the-art pre-trained models for various natural language processing tasks. It offers all types of models including - BERT, GPT, and T5, which can be loaded and fine-tuned for customizable tasks. The library supports other multiple deep learning frameworks such as PyTorch, TensorFlow, and JAX. Further, it makes it versatile for different development environments.\nKey features -\n\n\nAccess to a vast collection of pre-trained models.\n\n\nSupport most of the deep learning frameworks.\n\n\nEasy to use APIs for inference and future fine-tuning.\n\n\nExtensive community support is well maintained by tech leaders globally.\n\n\n\nPyTorch\n\nTo install -\n\n# !pip install torch\n\nPyTorch is commonly known as Torch. It is one of the most powerful open-source machine-learning libraries developed by Facebook. It is known for its dynamic computational graphs - that allows for more flexible and intuitive model development. It is quite popular among researchers in the field of deep learning due to its ease of use and powerful capabilities.\nKey features -\n\n\nDynamic computational graphs for flexible model development.\n\n\nEfficient GPU (like T4, A100, etc) acceleration for faster training and inference.\n\n\nFull collection of tools and libraries for various ML and DL tasks.\n\n\nRegular updates from the community keep everything up-to-date.\n\n\n\nPyannote\n\nTo install -\n\n# !pip install pyannote\n\nPyannote is an open-source Python toolkit. It is specifically designed for speaker diarization tasks. We will be using this library in Week 6 (the speech part). It helps to identify and cluster the fixed number of speakers from the given audio, this process in a nutshell is known as the speaker diarization. It uses the PyTorch deep learning framework. It provides trained models and pipelines, especially efficient in audio analysis. Further, it is also useful in tasks such as speaker segmentation, speaker clustering, and overlapped speech detection.\nKey features -\n\n\nProvides pre-trained models for speaker diarization tasks.\n\n\nHelps to assemble or create pipelines for audio processing.\n\n\nProvides GPU acceleration support for faster processing.\n\n\nFlexibility to fine-tune models on customized needs and datasets.\n\n\n\nWhisper\n\nTo install -\n\n# !pip install git+https://github.com/openai/whisper.git\n\n## Also, download FFmpeg for handling various audio formats with ease.\n\n# !pip install ffmpeg\n\nWhisper is another very powerful pre-trained model developed by OpenAI. We will be using this in Weeks 6 and 7. It helps in automatic speech recognition (commonly referred to as ASR) and speech translation. It has been trained on around 680,000 hours of labeled data (mostly in western languages). The vast amount of labeled data helps to generalize well across various datasets and domains, sometimes even without further fine-tuning. Whisper is available to use in different model sizes ranging from tiny to large. This helps to accommodate different computational requirements and varied use cases.\nKey features -\n\n\nRobust performance in various languages and certain accents.\n\n\nSupports speech recognition and translation tasks.\n\n\nAvailability of different model sizes making it usable for varied purposes.\n\n\nAvailable as open-source, thereby, creating a strong community.",
+    "crumbs": [
+      "Week 0",
+      "Sneak Peak"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DLP Study Guide",
+    "section": "",
+    "text": "Table of Contents\n\nWeek 0\n\nIntroduction\nSneak Peak",
+    "crumbs": [
+      "Index"
+    ]
+  },
+  {
     "objectID": "intro.html",
     "href": "intro.html",
     "title": "Introduction",
@@ -30,16 +51,6 @@
     "crumbs": [
       "Week 0",
       "Introduction"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "DLP Study Guide",
-    "section": "",
-    "text": "Table of Contents\n\nWeek 0\n\nIntroduction",
-    "crumbs": [
-      "Index"
     ]
   }
 ]
