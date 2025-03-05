@@ -12,3 +12,7 @@ page-navigation: true
 - Week 0
   - [Introduction](intro.qmd)
   - [Sneak Peak](sneak.qmd)
+- Week 5
+  - [L1: Introduction to Speech](5_1.qmd)
+  - [L2: Language Identification - Intro](5_2.qmd)
+  - [L3: Language Identification - Demo](5_2.qmd)
