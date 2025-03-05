@@ -1,0 +1,38 @@
+---
+title: "L2: Language Identification - Intro"
+format:
+  html:
+    code-fold: false
+# jupyter: python3
+page-navigation: true
+---
+
+In the first week of the speech module, we are going to carry out a simple experiment of identifying the language from a given speech sample. This is a simple experiment, yet has a lot of applications in the industry. For eg. we can route customer service based on the speaker's language and build speech recognition systems. 
+
+### Understanding the Importance of Language Identification
+
+1. We can use the models for language identification to streamline customer service interactions. The process will be automatically redirected to the respective domain experts based on the speaker's language. Thus, enabling the efficient routing of calls to the respective language-speaking agents. 
+2. Such models are especially very useful in vast multilingual countries like India with numerous languages. They are similarly helpful in other Western countries, where the English language has different variations and accents. 
+
+### Overview of the Task 1
+
+1. **Input:** Speech signal or an audio clip.
+2. **Output:** Identified Language (eg. Spanish, Romanian, English)
+3. **Methodology:** We will solve this problem with the help of a pattern classification methodology.
+
+### Understanding Pattern Classification
+
+1. Let's understand this with the help of an example. What if we had to classify the individuals as children, women, and men based on height and weight?
+2. In general, we understand that there is a sharp difference in the height-weight combination in the given 3 classes. In this, children are on the lowest bound and men on the highest edge. 
+3. **Features:** Height, Weight
+4. **Classes:** Children, Men, and Women
+5. **Labeled Data:** We will have a known classification of labeled data for training the system. 
+6. **Process:** First of all, we find the representative vector for each of the classes. Post that, the new data point will be determined by the closest match to representative vectors for each class. 
+
+### Language Identification Process
+
+1. **Feature Extraction -** In this step, we extract the features from the group of speech signals that will help distinguish the languages. It is helpful to know the total number of distinct languages beforehand. Here, we will be using some pre-trained models like `Wave2Vec 2.0` for extracting the features and speech representation. 
+2. **Training -** Once we have collected the labeled training data (we will be using a Facebook dataset for this purpose) - which is the collection of audio clips labeled with their respective languages. We can extract the features and keep them as embedding vectors from these audio clips using `Wave2Vec 2.0` or any other trained model. Next, we have to use the averaging method to average out the sequence of vectors obtained, so that we have a single representation for each clip. Thus, now we can train a classification system to minimize the errors in the training data. (Use `entropy loss` or `squared loss`)
+3. **Validation -** Generally, this step is not much used, but still it is better to stay in touch with the basics. We can use a small percentage of held-out data (known as the validation set) to check how well the model has generalized. It is easier to test here since we know the correct labels. It will help the system to perform better on the unseen data. 
+4. **Testing -** This step is also referred to as the Inferencing step. We can now apply our model (the trained system) to new, unlabeled audio clips. Thus, classifying the language based on the extracted features. 
+5. **Implementation -** We will review the implementation for this part in the next module in more detail. We will use the `Hugging Face Datasets` hub to get the audio clips for three languages (namely - English, Spanish, and Romanian). For our example, we will use 50 audio clips from each of them for training purposes. Next, we have to extract the features using the `Wave2Vec 2.0` model. Finally, we will be training a neural network classifier on the extracted features.
