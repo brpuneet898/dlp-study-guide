@@ -114,29 +114,28 @@ Use the above defined function, to extract the features from 150 audio clips. Pl
 We will be using our old `sklearn` library to split the dataset into train and test dataset. Further, train dataset will be split into train and validation dataset. 
 
 ```{python}
-from sklearn.model_selection import train_test_split
+# from sklearn.model_selection import train_test_split
 
-train_data, test_data = train_test_split(subset_with_features, test_size=0.2)
-train_data, val_data = train_test_split(train_data, test_size=0.1)
+# train_data, test_data = train_test_split(subset_with_features, test_size=0.2)
+# train_data, val_data = train_test_split(train_data, test_size=0.1)
 
-def prepare_data(data):
-    features = [item["features"] for item in data]
-    labels = [item["label"] for item in data]
-    return torch.tensor(features), torch.tensor(labels)
+# def prepare_data(data):
+#     features = [item["features"] for item in data]
+#     labels = [item["label"] for item in data]
+#     return torch.tensor(features), torch.tensor(labels)
 
 
-train_features, train_labels = prepare_data(train_data)
-val_features, val_labels = prepare_data(val_data)
-test_features, test_labels = prepare_data(test_data)
+# train_features, train_labels = prepare_data(train_data)
+# val_features, val_labels = prepare_data(val_data)
+# test_features, test_labels = prepare_data(test_data)
 ```
 
 ### Defining the Model and its Parameters - Class Structure
 
 Now we will be using torch library to define our neural network. 
 
-1. **Initialization (__init__ method):** Takes two parameters - input_dim (the number of input channels) and num_classes (the number of output classes).
+- **Initialization (__init__ method):** Takes two parameters - input_dim (the number of input channels) and num_classes (the number of output classes). Define the following layers:
 
-Defines the following layers:
     1. First Convolutional Layer (conv1):
 
         Input channels: input_dim
@@ -161,7 +160,7 @@ Defines the following layers:
         Input features: 128
         Output features: num_classes
 
-2. **Forward Pass (forward method):** Defines the flow of data through the network.
+- **Forward Pass (forward method):** Defines the flow of data through the network.
 
     1. Apply conv1, followed by ReLU activation and max pooling (kernel size 2)
     2. Apply conv2, followed by ReLU activation and max pooling (kernel size 2)
