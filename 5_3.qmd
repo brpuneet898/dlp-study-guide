@@ -1,0 +1,289 @@
+---
+title: "L3: Language Identification - Demo"
+format:
+  html:
+    code-fold: false
+jupyter: python3
+page-navigation: true
+---
+
+In this module, we will focusing on the implementation part of the Language Identification task. The learners are requested to copy the code into their colab notebook and run the cells to see the output. **Note :** After copying use `Ctrl + ?` to uncomment the code.
+
+### Installing the Required Libraries
+
+For the required task, we will be using datasets (to download the datasets), transformers, and torch library (to build complex neural networks).
+
+```{python}
+# !pip install transformers datasets torch
+```
+
+### Data Loading
+
+We will be using `Voxpopuli` dataset given by `Facebook` as our Language Identification dataset. 
+
+```{python}
+# from datasets import load_dataset
+
+## the Id of English language is 0. We will be streaming the input so as to reduce the comptutational task of downloading the entire dataset which is too large.
+# dataset = load_dataset("facebook/voxpopuli", "en", split='train', streaming=True)
+
+## spanish data language id 3
+# dataset_es = load_dataset("facebook/voxpopuli", "es", split='train', streaming=True)
+
+## romanian data language id 6
+# dataset_ro = load_dataset("facebook/voxpopuli", "ro", split='train', streaming=True)
+```
+
+### Data Selection
+
+As learned in the lectures, we will be adding only 50 samples from each of these datasets.
+
+```{python}
+# subset = []
+# for i, example in enumerate(dataset):
+#     if i >= 50:
+#         break
+#     subset.append(example)
+
+# for i, example in enumerate(dataset_es):
+#     if i >= 200:
+#         break
+#     subset.append(example)
+
+# for i, example in enumerate(dataset_ro):
+#     if i >= 200:
+#         break
+#     subset.append(example)
+```
+
+You can check the the length of the dataset. It should be 150 in our case.
+
+```{python}
+# len(subset)
+```
+
+To see the first row of the dataset -
+
+```{python}
+# subset[0]
+```
+
+Now, notice the change of language from 0 to 3 at 51st row.
+
+```{python}
+# subset[51]
+```
+
+We will using random shuffling, so as to remove the bias of particular language being on a particular row.
+
+```{python}
+# import random
+# random.shuffle(subset)
+```
+
+### Extracting the Features
+
+We will be loading the `Wave2Vec2` model from `transformers` library. This will help us to extract the features from the audio clips. Also, we are using the `tqdm` library to see the progress bar.
+
+```{python}
+# import torch
+# from transformers import Wav2Vec2Processor, Wav2Vec2Model
+# from tqdm import tqdm
+
+# processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-base-960h")
+# model = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-base-960h")
+# call_count=0
+# def extract_wav2vec_features(batch):
+#     global call_count
+#     call_count+=1
+#     print(call_count)
+#     inputs = processor(batch["audio"]["array"], sampling_rate=16000, return_tensors="pt", padding=True)
+#     with torch.no_grad():
+#         outputs = model(**inputs)
+#     return {"features": outputs.last_hidden_state.squeeze().mean(dim=0).numpy(), "label": batch["language"]}
+```
+
+Use the above defined function, to extract the features from 150 audio clips. Please note that this cell might take around 5 to 6 minutes to run, depending upon your CPU.
+
+```{python}
+# subset_with_features = [extract_wav2vec_features(example) for example in subset]
+```
+
+### Splitting the Dataset
+
+We will be using our old `sklearn` library to split the dataset into train and test dataset. Further, train dataset will be split into train and validation dataset. 
+
+```{python}
+from sklearn.model_selection import train_test_split
+
+train_data, test_data = train_test_split(subset_with_features, test_size=0.2)
+train_data, val_data = train_test_split(train_data, test_size=0.1)
+
+def prepare_data(data):
+    features = [item["features"] for item in data]
+    labels = [item["label"] for item in data]
+    return torch.tensor(features), torch.tensor(labels)
+
+
+train_features, train_labels = prepare_data(train_data)
+val_features, val_labels = prepare_data(val_data)
+test_features, test_labels = prepare_data(test_data)
+```
+
+### Defining the Model and its Parameters - Class Structure
+
+Now we will be using torch library to define our neural network. 
+
+1. **Initialization (__init__ method):** Takes two parameters - input_dim (the number of input channels) and num_classes (the number of output classes).
+
+Defines the following layers:
+    1. First Convolutional Layer (conv1):
+
+        Input channels: input_dim
+        Output channels: 128
+        Kernel size: 3
+        Padding: 1
+
+    2. Second Convolutional Layer (conv2):
+
+        Input channels: 128
+        Output channels: 256
+        Kernel size: 3
+        Padding: 1
+
+    3. First Fully Connected Layer (fc1):
+
+        Input features: 256 * (input_length // 4)
+        Output features: 128
+
+    4. Second Fully Connected Layer (fc2):
+
+        Input features: 128
+        Output features: num_classes
+
+2. **Forward Pass (forward method):** Defines the flow of data through the network.
+
+    1. Apply conv1, followed by ReLU activation and max pooling (kernel size 2)
+    2. Apply conv2, followed by ReLU activation and max pooling (kernel size 2)
+    3. Flatten the output
+    4. Apply fc1 with ReLU activation
+    5. Apply fc2 to produce final output
+
+Implementation - 
+
+```{python}
+# import torch
+# import torch.nn as nn
+# import torch.nn.functional as F
+# import torch.optim as optim
+
+# class CNNModel(nn.Module):
+#     def __init__(self, input_dim, num_classes):
+#         super(CNNModel, self).__init__()
+#         self.conv1 = nn.Conv1d(in_channels=input_dim, out_channels=128, kernel_size=3, padding=1)
+#         self.conv2 = nn.Conv1d(in_channels=128, out_channels=256, kernel_size=3, padding=1)
+#         self.fc1 = nn.Linear(256 * (input_length // 4), 128)  # Adjust the input dimension to the linear layer
+#         self.fc2 = nn.Linear(128, num_classes)
+
+#     def forward(self, x):
+#         x = F.relu(self.conv1(x))
+#         x = F.max_pool1d(x, kernel_size=2)
+#         x = F.relu(self.conv2(x))
+#         x = F.max_pool1d(x, kernel_size=2)
+#         x = x.view(x.size(0), -1)
+#         x = F.relu(self.fc1(x))
+#         x = self.fc2(x)
+#         return x
+```
+
+### Model Training
+
+Once, we have defined our model. It's time we train it and check the validation loss after each epoch.
+
+```{python}
+## Assuming train_features and val_features are already loaded
+## And they have the shape [batch_size, sequence_length]
+# input_length = train_features.shape[1]  # Add this line to get the sequence length
+
+## Assuming we have 3 languages in the dataset, and the original labels are 6, 0, and 3
+# label_mapping = {6: 0, 0: 1, 3: 2}
+
+## Apply the label mapping
+# train_labels = train_labels.apply_(lambda x: label_mapping[x])
+# val_labels = val_labels.apply_(lambda x: label_mapping[x])
+# test_labels = test_labels.apply_(lambda x: label_mapping[x])
+
+## Verify the mapping
+# unique_train_labels = torch.unique(train_labels)
+# unique_val_labels = torch.unique(val_labels)
+# unique_test_labels = torch.unique(test_labels)
+# print(f"Mapped unique train labels: {unique_train_labels}")
+# print(f"Mapped unique validation labels: {unique_val_labels}")
+# print(f"Mapped unique test labels: {unique_test_labels}")
+
+## Initialize the model
+# model = CNNModel(input_dim=1, num_classes=3)
+
+## Define loss function and optimizer
+# criterion = nn.CrossEntropyLoss()
+# optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+## Training loop
+# num_epochs = 20
+# for epoch in range(num_epochs):
+#     model.train()
+#     optimizer.zero_grad()
+#     outputs = model(train_features.unsqueeze(1).float())
+#     loss = criterion(outputs, train_labels)
+#     loss.backward()
+#     optimizer.step()
+
+## Validation
+#     model.eval()
+#     with torch.no_grad():
+#         val_outputs = model(val_features.unsqueeze(1).float())
+#         val_loss = criterion(val_outputs, val_labels)
+
+#     print(f"Epoch {epoch+1}/{num_epochs}, Loss: {loss.item()}, Val Loss: {val_loss.item()}")
+```
+
+We can put a threshold after which if the loss and validation loss are below the threshold we can stop the training post that.
+
+### Testing/Inference Step
+
+We can now use the trained model to test on the unseen data and calculate it's accuracy - of how the model is performing. We will be using the `accuracy_score` metric from sklearn library for this purpose.
+
+```{python}
+# import torch
+# from sklearn.metrics import accuracy_score
+
+## Ensure your model is in evaluation mode
+# model.eval()
+
+## Disable gradient computation
+# with torch.no_grad():
+#     # Forward pass to get predictions
+#     test_outputs = model(test_features.unsqueeze(1).float())
+
+
+## Get the predicted class labels
+#     _, predicted = torch.max(test_outputs, 1)
+
+## Calculate accuracy
+#     accuracy = accuracy_score(test_labels.numpy(), predicted.numpy())
+
+## Print the test accuracy
+# print(f"Test Accuracy: {accuracy * 100:.2f}%")
+```
+
+### Suggestions for the Students 
+
+The students can try the following exercise to learn more about this experiment - 
+
+1. Incease the dataset size from 50 to n.
+2. Adjust the number of epochs - go for training more epochs if the accuracy still improves.
+3. Experiment with different model architectures - different CNN configurations or even try RNNs. See what happens!
+4. You can try to vary the feature extraction models - use different pre-trained models like `HuBERT`, `Wav2Vec-U`. Or you can experiment by changing the layers.
+5. Try different data augmentation techniques like time stretching, pitch shifting - they should be relevant on continuous time signals or waveforms.
+6. Hyperparameter tuning is always present - play with learning rate, batch size, etc.
+7. You can try to apply complex cross-validation methods like `k-fold` for more robust evaluation.
