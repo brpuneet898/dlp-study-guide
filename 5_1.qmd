@@ -1,0 +1,49 @@
+---
+title: "L1: Introduction to Speech"
+format:
+  html:
+    code-fold: false
+# jupyter: python3
+page-navigation: true
+---
+
+Now that we have completed the first four modules related to Natural Language Processing, we will now deal with speech technology. 
+
+### The Fundamentals of Speech - 
+
+1. Speech, when recorded or available to us, is usually in the form of a waveform, also we can represent it in the form of a continuous-time signal. 
+2. The primary goal of the speech is communication. 
+3. Going by history, it has been recorded that speech evolved before text as a means of human communication. Even today, in the remotest of villages, even if the people can't read or write, they can still speak (it could be their native language). 
+
+### What are the differences between speech and text?
+
+1. Speech is much more difficult to visualize than processing the text.
+2. The speech provides a lot of variations in understanding a particular context, just by varying the pitch and the length of the same sentence. This is more or less not possible in the text.
+3. The building blocks of the text are discrete alphabets (A - Z). On the other hand, the building blocks of speech are phonemes (that use continuous signals). 
+
+### The Process of Speech Production
+
+1. The message that we want to convey is first of all formed in the brain. 
+2. There are innumerable ways to represent the same message. Eg. "Do you want to go for lunch?", "Lunch?", etc.
+3. The variation in the pitch can convert any question to a statement or vice-versa.
+4. During the perception part, the ear processes the incoming speech signal. 
+5. Finally, the receiver's brain interprets the processing speech signal, thus, extracting the message. 
+
+### Understanding Phonemes
+
+1. As stated, the phonemes are the basic units of speech, that usually fulfill the analogy to alphabets in the text processing. 
+2. Generally, each language has its own set of phonemes. Usually, a language has 45 - 60 phonemes. 
+3. Eg. Good -> { /g/, /uh/, /d/ }
+4. A particular word identified in a speech is nothing but a sequence of phonemes. This is similar to how the continuous set of alphabets forms the textual words.
+
+### Differentiating Speech from other Audio Samples (like Music)
+
+1. Speech usually has a simple and distinct structure that can be modeled using simple mathematical models. On the other hand, music or any other general audio sample is more complex and quite difficult to model.
+2. Audio samples like Music have harmonics that are smooth and are in rhythm. Therefore, they can not be represented in the form of a sparse matrix. 
+
+### Useful Features of Speech 
+
+1. It provides the different kinds of characteristics of a speaker. For eg. gender identification (female or male depending on the pitch length), age estimation (easy to differentiate into 3 clusters - children, adults, and old age), and useful as a voice in biometrics. 
+2. It conveys different types of emotional and contextual information like excitement, insistence, etc. Further, it provides a lot of context (if heard correctly) that may not be inherent clearly with the help of text. 
+3. As few words are spoken, it is quite easy to identify the language spoken. It has a lot of applications in support and voice call teams. 
+4. During the COVID times, speech was also used to identify and reveal some respiratory or nasal issues. 
