@@ -1,0 +1,44 @@
+---
+title: "L4: Language Identification - Demo"
+format:
+  html:
+    code-fold: false
+jupyter: python3
+page-navigation: true
+---
+
+In this module, we will walkthrough the code for speaker diarization problem. The learners are requested to copy the code into their colab notebook and run the cells to see the output. **Note :** After copying use `Ctrl + ?` to uncomment the code.
+
+### Install the Required Dependcies
+
+We will be using speech brain to extract the feature embeddings, whisper will be used for extracting text with timestamps. Finally, we will use pynannote to cluster the segments. 
+
+```{python}
+# !pip install speechbrain==0.5.16
+# !pip install faster_whisper
+# !pip install pyannote.audio
+# !pip install whisper
+```
+
+### Import Necessary Libraries
+
+```{python}
+import librosa
+import traceback
+from faster_whisper import WhisperModel
+import torch
+import whisper
+import datetime
+from pathlib import Path
+import pandas as pd
+import re
+import time
+import os
+import numpy as np
+from sklearn.cluster import AgglomerativeClustering
+from pyannote.audio.pipelines.speaker_verification import PretrainedSpeakerEmbedding
+from pyannote.audio import Audio
+from pyannote.core import Segment
+import speechbrain
+from scipy.spatial.distance import cdist
+```
