@@ -1,0 +1,29 @@
+---
+title: "L1: Speaker Diarisation - Intro"
+format:
+  html:
+    code-fold: false
+# jupyter: python3
+page-navigation: true
+---
+
+This week, we will focus on the second experiment in our speech part of the DLP course. Speaker Dilution is a technique for identifying which speaker spoke in a multi-speaker audio recording. It is also related to voice biometrics, but it still differs as the latter does speaker verification, which is mainly used for security and authentication. It is mainly used in applications like creating minutes-of-meeting transcripts and analyzing large volumes of speech data. 
+
+The speaker diarization technique is different from ASR. In ASR (automatic speech recognition) commonly referred to as STT (speech to text), we convert the spoken words into text. It works as a NLP technique but on speech data. Whisper is a powerful tool that we will be using for ASR, in the next week. 
+
+### Techniques and Tools - 
+
+1. The Whisper ASR model has been trained on 680,000 hours of speech data. Most of the audio samples are trained in American English, therefore, the model is a bit incompetent in other languages (due to the lack of data points). How it will help in our experiments? The Whisper model outputs the timestamps for spoken text, thus, we have transcribed the audio into text in this step. 
+2. Next step, we have to extract the speaker embeddings with the help of Speaker Embedding Extractors. There are numerous such extractors in the market (eg. Speech Toolkit, KALDI, ESPNet, SpeechBrain). For our experiment, we will be using SpeechBrain's ECAPA-TDNN model to extract the unique features each of speaker. Thus, differentiating the speakers based on this. Later, we can connect speaker embeddings to the transcribed text to solve "who said what."
+
+### Steps for Speaker Diarization - 
+
+1. **Speech to Text:** Use a model like Whisper to convert the audio into text along with the correct timestamps. 
+2. **Speaker Identification:** As discussed, we will be using ECAPA-TDNN to extract the unique features of the speaker. Next, we will be comparing these embeddings to identify the places the speakers change. 
+3. **Diarization:** In this step, we will be combining the speech-to-text output with the ECAPA-TDNN embeddings to create a readable script showing who spoke when. 
+
+### Applications of Speaker Diarization - 
+
+1. It helps to create readable and shareable transcripts for the minutes of the meeting. 
+2. It is useful to analyze political speeches or financial conferences to track the specific speakers. It further can influence an organization accordingly. 
+3. Once, more data on Indic languages are prepared, the process will support other languages as well. 
