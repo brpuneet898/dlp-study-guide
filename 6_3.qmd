@@ -1,0 +1,25 @@
+---
+title: "L3: Clustering Techniques"
+format:
+  html:
+    code-fold: false
+# jupyter: python3
+page-navigation: true
+---
+
+Now, we have used Whisper to extract the text with timestamps. Further, we identified the speakers using the ECAPA-TDNN model. In this module, we will focus on clustering techniques, especially the Agglomerative clustering method. We will learn about how to apply the clustering method to group similar speaker segments together. 
+
+### Agglomerative Clustering 
+
+It is a hierarchical clustering method that considers each data point as a cluster or center of the cluster. Further, it goes on to merge the closest clusters until the desired number of clusters has been achieved. It will be used in our speaker diarization technique. It will group similar speaker embeddings (that we found based on the cosine distance in the last module) into the same cluster ~ leading to the assumption that they belong to the same speaker. 
+
+1. In the initialization phase, we start by considering each data point we received as a unique cluster. It means for now we are assuming each segment could be a different cluster. 
+2. We go back to calculating the cosine distance between each pair of clusters. (Note - You will get an upper triangular matrix, see why?)
+3. In the final step, we merge the first two clusters which have the least cosine distance. Iterate the process until the desired number of clusters is achieved. 
+
+### Steps for Speaker Diarization (with Example)
+
+1. First of all, divide the audio into segments based on the speech activity. In our example, we are assuming there are 7 segments in the audio recording. Also, importantly, we assume prior knowledge that we have only 2 speakers. 
+2. Next, we use a model like the ECAPA-TDNN model to extract the speaker feature embedding vector for each segment. So, in our case, we will get 7 such speaker embeddings (S1, ..., S7).
+3. Further, we initialize each segment as its cluster (as we are using Agglomerative clustering). Now, we have to calculate the cosine distance between each of the clusters (we will get values from <S1, S2>, ..., <S6, S7>). Here, we have to merge the 2 clusters with the minimum distance. For eg. let's say S4 and S7 have the least distance in the matrix. Now, we can denote S4 as S4' and S7 as S4', which means both the segments belong to the same speaker. We have to keep iterating the process until we reach the desired number of speakers. 
+4. Use the final clusters to label each segment with the corresponding name or ID for each speaker. In our example, the two speakers are S1 (male) and S2 (female).
