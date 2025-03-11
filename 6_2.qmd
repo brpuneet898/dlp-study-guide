@@ -1,0 +1,21 @@
+---
+title: "L2: Speaker Identification"
+format:
+  html:
+    code-fold: false
+# jupyter: python3
+page-navigation: true
+---
+
+In the first module, we saw the entire process of speaker diarization. Now, we will delve deep into each component. 
+
+Speaker Identification, in this step, we first recognize who is speaking. Basically, the process identifies the speaker based on their voice. We have to understand that each handwritten text, even if written by the same person differs in the strokes. Similarly, each speech recording even by the same person differs. In this process, we use a speaker embedding extractor (for us - ECAPA-TDNN) to create unique vectors (by the averaging method) for each speaker. It is very similar to identifying a person on a call or recording by comparing their voice features with the known speaker (in our mind) profiles. Now, let's say the model has identified 7 speakers in our sample audio recording. But, we know that only 2 speakers were involved. How to get the correct estimate? There are two methods for this - 
+
+1. Euclidean Distance - It measures the straight line distance between given any two vectors. For vectors For vectors $$X = (x_1, x_2)$$ and $$Y = (y_1, y_2)$$, the Euclidean distance is $$\sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2}$$. It will compare the similarity between two speaker embeddings by calculating how close or far they are in the vector space. 
+2. Cosine Distance - More reliable in our case. It measures the cosine of the angle between the two vectors. It indicates the similarity regardless of the magnitude. This procedure is more useful for audio signals, as their magnitude does not explain much. We have to only focus on the direction or the angle between the given two vectors. For vectors $$ X $$ and $$ Y $$, cosine similarity is $$ \frac{X \cdot Y}{\|X\|\|Y\|} $$. Cosine distance is $$ 1 - \text{cosine similarity} $$. 
+
+### Process - 
+
+1. The vector embeddings for each speaker like (S1, S2, etc) are extracted with the help of the ECAPA-TDNN model. Now, we have to calculate the cosine distance between each of them.
+2. If <S1, S2> < <S1, S3>, then S1 is more closer to S2, than S3. Thus, we can deduce, from the given information that S1 and S2 are the same speakers. Thus, identifying and reducing the speakers one by one after each iteration. 
+3. To keep things simple, for now, we will assume that there are only "n" number of speakers in the given recording (that is, n is fixed for now). Even though, the readers should understand, there are techniques which can even estimate the correct number of speakers, even if the number is not known in the beginning. 
